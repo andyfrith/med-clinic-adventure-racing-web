@@ -87,9 +87,10 @@ Use hierarchical keys: `['queue', eventId]`, `['visit', visitId]`. See `src/lib/
 
 1. Connect the GitHub repo to [Vercel](https://vercel.com).
 2. Set environment variables for **Preview** and **Production**:
-   - `DATABASE_URL` — Neon connection string (SSL)
-   - `AUTH_SECRET` — random secret (`openssl rand -base64 32`)
-   - `AUTH_URL` — optional; Vercel sets `VERCEL_URL` for previews
+   - `DATABASE_URL` — Neon connection string (SSL); preview can share the same Neon DB as production
+   - `AUTH_SECRET` — random secret (`openssl rand -base64 32`); use the same value for preview and production unless you prefer isolation
+   - `AUTH_URL` — **Production only** (e.g. `https://med-clinic-adventure-racing-web.vercel.app`)
+   - `AUTH_TRUST_HOST` — **`true` on Preview** so Auth.js accepts per-PR `*.vercel.app` URLs (Vercel sets `VERCEL_URL` automatically)
 3. Push to `main` or open a PR — Vercel creates a **preview deployment** per PR.
 4. Run migrations against Neon before or as part of release (CI runs migrate on PR; apply to Neon for preview/prod via your release process).
 
