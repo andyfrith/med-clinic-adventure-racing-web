@@ -94,6 +94,18 @@ Use hierarchical keys: `['queue', eventId]`, `['visit', visitId]`. See `src/lib/
 3. Push to `main` or open a PR — Vercel creates a **preview deployment** per PR.
 4. Run migrations against Neon before or as part of release (CI runs migrate on PR; apply to Neon for preview/prod via your release process).
 
+## Contributing
+
+`master` is protected: changes merge via **pull request** only.
+
+1. Branch from `master`: `git checkout -b your-branch-name`
+2. Commit, push, and open a PR targeting `master`
+3. Wait for **CI** to pass (required check: `quality`)
+4. Use the **Vercel preview** deployment on the PR to verify UI changes
+5. Merge when approved
+
+Production: https://med-clinic-adventure-racing-web.vercel.app (deploys from `master`).
+
 ## CI
 
 GitHub Actions (`.github/workflows/ci.yml`) on push/PR: lint, typecheck, migrate (Postgres service), Vitest, build, Playwright E2E against production build.

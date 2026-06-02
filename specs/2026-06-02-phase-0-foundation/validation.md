@@ -16,7 +16,7 @@ How we know implementation succeeded and the phase PR can merge.
 | **E2E**          | Playwright in CI                              | Smoke spec passes (app serves; key page reachable)         |
 | **Build**        | Next.js production build                      | Succeeds in CI                                             |
 
-GitHub Actions workflow runs on PR; merge blocked if any required job fails.
+GitHub Actions workflow runs on PR; merge blocked if any required job fails. `master` requires a PR and passing checks (branch protection).
 
 **Playwright (CI):** E2E runs against `pnpm start` after `pnpm build`. **Local:** `pnpm test:e2e` uses `pnpm dev` with `reuseExistingServer`.
 
