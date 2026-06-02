@@ -36,12 +36,12 @@ GitHub Actions workflow runs on PR; merge blocked if any required job fails. `ma
 
 Per [responsive-design.md](../responsive-design.md):
 
-- [ ] Home or staff shell renders on desktop width (`lg+`, 1024px+).
-- [ ] Staff shell at **375px** width: no horizontal scroll; mobile nav (sheet/drawer) opens and closes.
-- [ ] Staff shell at **768px** width: usable clinician layout; sidebar collapses or drawer available.
-- [ ] Placeholder routes exist and are reachable: **clinician**, **doctor**, **ops**, **racer**.
-- [ ] **Racer** route usable on phone width: single column, tap targets ≥ 44px on primary actions.
-- [ ] **Kiosk / waiting-area** route at **1920×1080**: read-only feel, large readable text, minimal navigation chrome.
+- [x] Home or staff shell renders on desktop width (`lg+`, 1024px+).
+- [x] Staff shell at **375px** width: no horizontal scroll; mobile nav (sheet/drawer) opens and closes.
+- [x] Staff shell at **768px** width: usable clinician layout; sidebar collapses or drawer available.
+- [x] Placeholder routes exist and are reachable: **clinician**, **doctor**, **ops**, **racer**.
+- [x] **Racer** route usable on phone width: single column, tap targets ≥ 44px on primary actions.
+- [x] **Kiosk / waiting-area** route at **1920×1080**: read-only feel, large readable text, minimal navigation chrome.
 - [ ] No secrets in client bundle (env only server-side where applicable).
 
 ---

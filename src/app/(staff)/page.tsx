@@ -41,7 +41,10 @@ export default function HomePage() {
             <CardContent>
               <Link
                 href={href}
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))}
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  'min-h-11 w-full justify-center sm:w-auto',
+                )}
               >
                 Open
                 <ArrowRight className="size-4" aria-hidden />
