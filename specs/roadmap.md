@@ -29,9 +29,9 @@ Captured via constitution questionnaire.
 - [x] CI: GitHub Actions → Vercel preview
 - [x] `.env.example`; README: `docker compose up`, migrate, dev, deploy
 - [x] **Auth decision** documented in `tech-stack.md`
-- [ ] Note in README: compliance deferred; v1 open in-app data access per `mission.md` (deferred to Phase 1 per requirements)
+- [ ] Note in README: compliance deferred; v1 open in-app data access per `mission.md` (**Phase 1** — see `mission.md` until README paragraph is added)
 
-**Demo:** App on Vercel preview; local Docker DB; CI green.
+**Demo:** App on [Vercel production](https://med-clinic-adventure-racing-web.vercel.app); PR previews; local Docker DB; CI green on `master`.
 
 ---
 
