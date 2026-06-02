@@ -26,7 +26,7 @@ Captured via constitution questionnaire.
 - [x] Next.js + TypeScript + ESLint/Prettier
 - [x] Drizzle + Postgres (Docker Compose local; Neon connection for prod)
 - [x] Tailwind + shadcn/ui app shell (layout stub; responsive standards in `responsive-design.md`)
-- [ ] **Responsive design pass** — app shell, placeholder routes, and kiosk meet `responsive-design.md` (mobile nav, viewport tests)
+- [x] **Responsive design pass** — app shell, placeholder routes, and kiosk meet `responsive-design.md` (mobile nav, viewport tests)
 - [x] CI: GitHub Actions → Vercel preview
 - [x] `.env.example`; README: `docker compose up`, migrate, dev, deploy
 - [x] **Auth decision** documented in `tech-stack.md`
