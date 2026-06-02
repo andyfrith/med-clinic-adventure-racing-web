@@ -10,6 +10,9 @@ Captured via constitution questionnaire.
 |----------|--------|
 | **ORM** | **Drizzle** |
 | **UI** | **Tailwind CSS + shadcn/ui** |
+| **Server / client state** | **TanStack Query** |
+| **Forms** | **React Hook Form** + **Zod** (`@hookform/resolvers`) |
+| **Validation** | **Zod** (shared schemas, client + server) |
 | **Auth** | **Decide in Phase 0** (candidates: email/password + server sessions) |
 | **Local development** | **Docker** + **PostgreSQL** (local) |
 | **Production** | **Vercel** (app) + **Neon** (Postgres) |
@@ -34,9 +37,23 @@ Captured via constitution questionnaire.
 | **UI** | React + **Tailwind** + **shadcn/ui** | Fast, attractive, responsive UI |
 | **Database** | **PostgreSQL** | README requirement; relational visits, racers, sessions |
 | **ORM** | **Drizzle** | SQL-first, migrations, strong typing |
+| **Validation** | **Zod** | Single source of truth for input/API shapes; parse on server; infer TS types |
+| **Forms** | **React Hook Form** | Performant forms; pairs with shadcn `Form` + Zod resolver |
+| **Server state (client)** | **TanStack Query** | Cache, refetch, and mutations for queue/kiosk live data and dashboards |
 | **Auth** | **TBD Phase 0** | Staff + racer flows; document choice before Phase 1 |
 | **Local** | **Docker Compose** → Postgres | Matches prod schema; easy onboarding |
 | **Production** | **Vercel** + **Neon** | Preview deploys; managed Postgres |
+
+## Data, forms & validation
+
+| Library | Role | Conventions |
+|---------|------|-------------|
+| **Zod** | Define schemas in shared modules (e.g. `lib/validations/`). **Always re-validate on the server** (Server Actions, Route Handlers) even when the client uses the same schema. | Prefer `z.infer<typeof schema>` for types; avoid duplicating interfaces. |
+| **React Hook Form** | All interactive forms (check-in, visit notes, session booking, admin). Use `@hookform/resolvers/zod` with shadcn/ui `Form` components. | Default values from server data; minimal controlled re-renders. |
+| **TanStack Query** | Client-side **server state**: queue lists, kiosk polling, dashboards. Use `QueryClientProvider` in the root layout. | Prefer Server Actions or Route Handlers as fetch/mutation targets; set `staleTime` / `refetchInterval` for live queue (Phase 3+). Mutations invalidate related query keys. |
+
+- **Not replaced by TanStack Query:** Drizzle persistence, auth sessions, or one-off server rendering—those stay server-first per architecture below.
+- **shadcn/ui:** Form primitives assume RHF + Zod; follow [shadcn Form](https://ui.shadcn.com/docs/components/form) patterns.
 
 ## Architecture (high level)
 
@@ -50,7 +67,8 @@ Captured via constitution questionnaire.
 [Drizzle → PostgreSQL (Neon prod / Docker local)]
 ```
 
-- **Server-first** — Validation and persistence on server.
+- **Server-first** — Validation and persistence on server (Zod parse in actions/handlers; never trust client-only checks).
+- **Client server-state** — TanStack Query for live/refetched reads after hydration; forms via RHF + Zod.
 - **Multi-tenant by event** — `event_id` on core entities.
 - **v1 access model** — Authentication required; authorized users see full racer/visit records (see `mission.md`).
 
