@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: med-clinic-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: medclinic
+      POSTGRES_PASSWORD: medclinic
+      POSTGRES_DB: med_clinic_dev
+    volumes:
+      - med_clinic_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U medclinic -d med_clinic_dev']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  med_clinic_pg_data:

@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, phase-0-foundation]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      AUTH_SECRET: ci-auth-secret-placeholder
+      DATABASE_URL: postgresql://medclinic:medclinic@localhost:5432/med_clinic_dev
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: medclinic
+          POSTGRES_PASSWORD: medclinic
+          POSTGRES_DB: med_clinic_dev
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U medclinic -d med_clinic_dev"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Run migrations
+        run: pnpm db:migrate
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install chromium --with-deps
+
+      - name: E2E tests
+        run: pnpm test:e2e
+        env:
+          CI: true

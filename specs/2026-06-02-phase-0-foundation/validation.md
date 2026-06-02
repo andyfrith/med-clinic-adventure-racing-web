@@ -8,25 +8,27 @@ How we know implementation succeeded and the phase PR can merge.
 
 ## Automated checks (CI — must pass)
 
-| Check | Command / source | Pass criteria |
-|-------|------------------|---------------|
-| **Lint** | ESLint via CI | Zero errors on changed code |
-| **Typecheck** | `tsc --noEmit` and/or `next build` type phase | No type errors |
-| **Unit / smoke** | Vitest | All tests green; at least one meaningful smoke test exists |
-| **E2E** | Playwright in CI | Smoke spec passes (app serves; key page reachable) |
-| **Build** | Next.js production build | Succeeds in CI |
+| Check            | Command / source                              | Pass criteria                                              |
+| ---------------- | --------------------------------------------- | ---------------------------------------------------------- |
+| **Lint**         | ESLint via CI                                 | Zero errors on changed code                                |
+| **Typecheck**    | `tsc --noEmit` and/or `next build` type phase | No type errors                                             |
+| **Unit / smoke** | Vitest                                        | All tests green; at least one meaningful smoke test exists |
+| **E2E**          | Playwright in CI                              | Smoke spec passes (app serves; key page reachable)         |
+| **Build**        | Next.js production build                      | Succeeds in CI                                             |
 
 GitHub Actions workflow runs on PR; merge blocked if any required job fails.
+
+**Playwright (CI):** E2E runs against `pnpm start` after `pnpm build`. **Local:** `pnpm test:e2e` uses `pnpm dev` with `reuseExistingServer`.
 
 ---
 
 ## Deployment & database (preview)
 
-| Check | How to verify | Pass criteria |
-|-------|---------------|---------------|
-| **Vercel preview** | Open PR preview URL | App shell loads (no 5xx) |
+| Check                 | How to verify                                                                 | Pass criteria                                                                |
+| --------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **Vercel preview**    | Open PR preview URL                                                           | App shell loads (no 5xx)                                                     |
 | **Neon connectivity** | Preview env uses Neon `DATABASE_URL`; optional DB health route or migrate job | Preview can reach DB (connection succeeds; migrations applied or documented) |
-| **Local parity** | Follow README from clean clone | `docker compose up`, migrate, `dev` works |
+| **Local parity**      | Follow README from clean clone                                                | `docker compose up`, migrate, `dev` works                                    |
 
 ---
 
@@ -78,13 +80,13 @@ GitHub Actions workflow runs on PR; merge blocked if any required job fails.
 
 ## Merge checklist (sign-off)
 
-| Item | Owner | Done |
-|------|-------|------|
-| CI green on PR | Author | ☐ |
-| Manual demo (local) | Author | ☐ |
-| Preview URL + Neon verified | Author / reviewer | ☐ |
-| `tech-stack.md` auth updated | Author | ☐ |
-| Roadmap Phase 0 items reflected in PR description | Author | ☐ |
+| Item                                              | Owner             | Done |
+| ------------------------------------------------- | ----------------- | ---- |
+| CI green on PR                                    | Author            | ☐    |
+| Manual demo (local)                               | Author            | ☐    |
+| Preview URL + Neon verified                       | Author / reviewer | ☐    |
+| `tech-stack.md` auth updated                      | Author            | ☐    |
+| Roadmap Phase 0 items reflected in PR description | Author            | ☐    |
 
 **Not required for merge:** Real login, domain models, HIPAA controls, README compliance paragraph.
 

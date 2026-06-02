@@ -6,18 +6,18 @@ Constitutional technical choices for Adventure Racing Med Clinic. Deviations req
 
 Captured via constitution questionnaire.
 
-| Decision | Choice |
-|----------|--------|
-| **ORM** | **Drizzle** |
-| **UI** | **Tailwind CSS + shadcn/ui** |
-| **Server / client state** | **TanStack Query** |
-| **Forms** | **React Hook Form** + **Zod** (`@hookform/resolvers`) |
-| **Validation** | **Zod** (shared schemas, client + server) |
-| **Auth** | **Decide in Phase 0** (candidates: email/password + server sessions) |
-| **Local development** | **Docker** + **PostgreSQL** (local) |
-| **Production** | **Vercel** (app) + **Neon** (Postgres) |
-| **Connectivity (v1)** | **Online-only** — reliable venue Wi‑Fi assumed |
-| **Compliance tooling** | **Deferred** — no HIPAA-specific stack requirements in Phase 0–7 |
+| Decision                    | Choice                                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------------------------- |
+| **ORM**                     | **Drizzle**                                                                                     |
+| **UI**                      | **Tailwind CSS + shadcn/ui**                                                                    |
+| **Server / client state**   | **TanStack Query**                                                                              |
+| **Forms**                   | **React Hook Form** + **Zod** (`@hookform/resolvers`)                                           |
+| **Validation**              | **Zod** (shared schemas, client + server)                                                       |
+| **Auth**                    | **Auth.js** (credentials + sessions + Drizzle adapter)                                          |
+| **Local development**       | **Docker** + **PostgreSQL** (local)                                                             |
+| **Production**              | **Vercel** (app) + **Neon** (Postgres)                                                          |
+| **Connectivity (v1)**       | **Online-only** — reliable venue Wi‑Fi assumed                                                  |
+| **Compliance tooling**      | **Deferred** — no HIPAA-specific stack requirements in Phase 0–7                                |
 | **In-app data access (v1)** | **All authenticated users** — full racer/visit data; no field-level RBAC until post–first event |
 
 ---
@@ -30,27 +30,27 @@ Captured via constitution questionnaire.
 
 ## Core stack
 
-| Layer | Choice | Rationale |
-|-------|--------|-----------|
-| **Language** | TypeScript (strict) | End-to-end types for clinical workflows |
-| **Framework** | Next.js (App Router) | README stakeholder requirement; Server Actions / Route Handlers |
-| **UI** | React + **Tailwind** + **shadcn/ui** | Fast, attractive, responsive UI |
-| **Database** | **PostgreSQL** | README requirement; relational visits, racers, sessions |
-| **ORM** | **Drizzle** | SQL-first, migrations, strong typing |
-| **Validation** | **Zod** | Single source of truth for input/API shapes; parse on server; infer TS types |
-| **Forms** | **React Hook Form** | Performant forms; pairs with shadcn `Form` + Zod resolver |
-| **Server state (client)** | **TanStack Query** | Cache, refetch, and mutations for queue/kiosk live data and dashboards |
-| **Auth** | **TBD Phase 0** | Staff + racer flows; document choice before Phase 1 |
-| **Local** | **Docker Compose** → Postgres | Matches prod schema; easy onboarding |
-| **Production** | **Vercel** + **Neon** | Preview deploys; managed Postgres |
+| Layer                     | Choice                               | Rationale                                                                    |
+| ------------------------- | ------------------------------------ | ---------------------------------------------------------------------------- |
+| **Language**              | TypeScript (strict)                  | End-to-end types for clinical workflows                                      |
+| **Framework**             | Next.js (App Router)                 | README stakeholder requirement; Server Actions / Route Handlers              |
+| **UI**                    | React + **Tailwind** + **shadcn/ui** | Fast, attractive, responsive UI                                              |
+| **Database**              | **PostgreSQL**                       | README requirement; relational visits, racers, sessions                      |
+| **ORM**                   | **Drizzle**                          | SQL-first, migrations, strong typing                                         |
+| **Validation**            | **Zod**                              | Single source of truth for input/API shapes; parse on server; infer TS types |
+| **Forms**                 | **React Hook Form**                  | Performant forms; pairs with shadcn `Form` + Zod resolver                    |
+| **Server state (client)** | **TanStack Query**                   | Cache, refetch, and mutations for queue/kiosk live data and dashboards       |
+| **Auth**                  | **Auth.js** (NextAuth v5)            | Credentials + sessions; Drizzle adapter in Phase 1                           |
+| **Local**                 | **Docker Compose** → Postgres        | Matches prod schema; easy onboarding                                         |
+| **Production**            | **Vercel** + **Neon**                | Preview deploys; managed Postgres                                            |
 
 ## Data, forms & validation
 
-| Library | Role | Conventions |
-|---------|------|-------------|
-| **Zod** | Define schemas in shared modules (e.g. `lib/validations/`). **Always re-validate on the server** (Server Actions, Route Handlers) even when the client uses the same schema. | Prefer `z.infer<typeof schema>` for types; avoid duplicating interfaces. |
-| **React Hook Form** | All interactive forms (check-in, visit notes, session booking, admin). Use `@hookform/resolvers/zod` with shadcn/ui `Form` components. | Default values from server data; minimal controlled re-renders. |
-| **TanStack Query** | Client-side **server state**: queue lists, kiosk polling, dashboards. Use `QueryClientProvider` in the root layout. | Prefer Server Actions or Route Handlers as fetch/mutation targets; set `staleTime` / `refetchInterval` for live queue (Phase 3+). Mutations invalidate related query keys. |
+| Library             | Role                                                                                                                                                                         | Conventions                                                                                                                                                                |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Zod**             | Define schemas in shared modules (e.g. `lib/validations/`). **Always re-validate on the server** (Server Actions, Route Handlers) even when the client uses the same schema. | Prefer `z.infer<typeof schema>` for types; avoid duplicating interfaces.                                                                                                   |
+| **React Hook Form** | All interactive forms (check-in, visit notes, session booking, admin). Use `@hookform/resolvers/zod` with shadcn/ui `Form` components.                                       | Default values from server data; minimal controlled re-renders.                                                                                                            |
+| **TanStack Query**  | Client-side **server state**: queue lists, kiosk polling, dashboards. Use `QueryClientProvider` in the root layout.                                                          | Prefer Server Actions or Route Handlers as fetch/mutation targets; set `staleTime` / `refetchInterval` for live queue (Phase 3+). Mutations invalidate related query keys. |
 
 - **Not replaced by TanStack Query:** Drizzle persistence, auth sessions, or one-off server rendering—those stay server-first per architecture below.
 - **shadcn/ui:** Form primitives assume RHF + Zod; follow [shadcn Form](https://ui.shadcn.com/docs/components/form) patterns.
@@ -74,13 +74,13 @@ Captured via constitution questionnaire.
 
 ## Quality & operations
 
-| Concern | Approach |
-|---------|----------|
-| **Testing** | Unit (domain); integration (API + DB); E2E (check-in → notes → cleared) |
-| **Linting / format** | ESLint + Prettier; CI on every PR |
-| **CI/CD** | GitHub Actions → Vercel preview → production |
-| **Migrations** | Drizzle Kit migrations only |
-| **Observability** | Structured logging; error tracking before first race (minimize sensitive data in logs until compliance pass) |
+| Concern              | Approach                                                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Testing**          | Unit (domain); integration (API + DB); E2E (check-in → notes → cleared)                                      |
+| **Linting / format** | ESLint + Prettier; CI on every PR                                                                            |
+| **CI/CD**            | GitHub Actions → Vercel preview → production                                                                 |
+| **Migrations**       | Drizzle Kit migrations only                                                                                  |
+| **Observability**    | Structured logging; error tracking before first race (minimize sensitive data in logs until compliance pass) |
 
 ## UX & client requirements
 
@@ -96,13 +96,12 @@ Formal HIPAA/regulatory requirements are **not** implemented in initial phases. 
 - BAA with vendors (Neon, Vercel, etc.) if required
 - Audit logging, retention, and role-based access refinements
 
-## Phase 0 auth decision (open)
+## Phase 0 auth decision (locked)
 
-Pick one before Phase 1 and record here:
+**Auth.js** (NextAuth v5) with credentials provider and **Drizzle adapter** for sessions/users.
 
-1. **Auth.js** (credentials + sessions + Prisma/Drizzle adapter)
-2. **Custom** sessions (cookie + Drizzle `Session` table)
-3. Other (document rationale)
+- Phase 0: config scaffold only (`src/auth.ts`, `/api/auth/[...nextauth]`); no route protection.
+- Phase 1: implement login, Drizzle tables, and middleware for staff/racer routes.
 
 ## Explicitly out of scope for v1 stack
 

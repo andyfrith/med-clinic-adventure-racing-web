@@ -8,14 +8,14 @@ Aligned with `mission.md` and `tech-stack.md`.
 
 Captured via constitution questionnaire.
 
-| Decision | Choice |
-|----------|--------|
-| **First stakeholder demo** | **End-to-end visit** — check-in → notes → cleared for race |
-| **Phase order** | **Keep recommended order** (queue before sessions; doctor oversight before hardening) |
-| **Offline / connectivity** | **Online-only** for v1 |
-| **First live event** | **Next single race** (aggressive timeline) |
-| **v1 roles** | Clinicians, doctors, ops, racers — all supported by first race |
-| **Kiosk** | Waiting-area display in v1 |
+| Decision                   | Choice                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| **First stakeholder demo** | **End-to-end visit** — check-in → notes → cleared for race                            |
+| **Phase order**            | **Keep recommended order** (queue before sessions; doctor oversight before hardening) |
+| **Offline / connectivity** | **Online-only** for v1                                                                |
+| **First live event**       | **Next single race** (aggressive timeline)                                            |
+| **v1 roles**               | Clinicians, doctors, ops, racers — all supported by first race                        |
+| **Kiosk**                  | Waiting-area display in v1                                                            |
 
 ---
 
@@ -23,13 +23,13 @@ Captured via constitution questionnaire.
 
 **Outcome:** Runnable locally and deployable to Vercel; stack locked.
 
-- [ ] Next.js + TypeScript + ESLint/Prettier
-- [ ] Drizzle + Postgres (Docker Compose local; Neon connection for prod)
-- [ ] Tailwind + shadcn/ui app shell (responsive + kiosk-friendly layout stub)
-- [ ] CI: GitHub Actions → Vercel preview
-- [ ] `.env.example`; README: `docker compose up`, migrate, dev, deploy
-- [ ] **Auth decision** documented in `tech-stack.md`
-- [ ] Note in README: compliance deferred; v1 open in-app data access per `mission.md`
+- [x] Next.js + TypeScript + ESLint/Prettier
+- [x] Drizzle + Postgres (Docker Compose local; Neon connection for prod)
+- [x] Tailwind + shadcn/ui app shell (responsive + kiosk-friendly layout stub)
+- [x] CI: GitHub Actions → Vercel preview
+- [x] `.env.example`; README: `docker compose up`, migrate, dev, deploy
+- [x] **Auth decision** documented in `tech-stack.md`
+- [ ] Note in README: compliance deferred; v1 open in-app data access per `mission.md` (deferred to Phase 1 per requirements)
 
 **Demo:** App on Vercel preview; local Docker DB; CI green.
 

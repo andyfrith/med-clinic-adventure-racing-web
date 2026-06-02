@@ -4,12 +4,12 @@
 
 Captured via constitution questionnaire.
 
-| Decision | Choice |
-|----------|--------|
-| **v1 primary outcome** | **Throughput** — fast queue, treatment, and return to race when medically appropriate |
-| **v1 roles (fully supported)** | **All** — clinicians, doctors, clinic ops/admin, and racers (self-service) |
-| **Racer visibility in v1** | **Shared kiosk / waiting-area display** for wait/status |
-| **Health data / compliance** | **Deferred** — HIPAA and formal compliance not addressed immediately; revisit before production scale |
+| Decision                       | Choice                                                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **v1 primary outcome**         | **Throughput** — fast queue, treatment, and return to race when medically appropriate                         |
+| **v1 roles (fully supported)** | **All** — clinicians, doctors, clinic ops/admin, and racers (self-service)                                    |
+| **Racer visibility in v1**     | **Shared kiosk / waiting-area display** for wait/status                                                       |
+| **Health data / compliance**   | **Deferred** — HIPAA and formal compliance not addressed immediately; revisit before production scale         |
 | **Data access within the app** | **Any authenticated user** may view full racer/patient and visit data in v1 (no field-level restrictions yet) |
 
 ---
@@ -22,13 +22,13 @@ Adventure Racing Med Clinic is an onsite clinical operations application for adv
 
 ## Who we serve
 
-| Audience | Need | v1 |
-|----------|------|-----|
-| **Clinicians & healthcare workers** | Fast queue, visit context, minimal taps, clear disposition | Full support |
-| **Doctors & clinical leads** | Oversight, holds, review without blocking frontline | Full support |
-| **Clinic ops / admin** | Event setup, dashboard, clinic flow | Full support |
-| **Racers** | Check-in / status; visibility while waiting | Full support (including self-service where designed) |
-| **Waiting area** | Shared display of queue/status | **Kiosk** display in v1 |
+| Audience                            | Need                                                       | v1                                                   |
+| ----------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| **Clinicians & healthcare workers** | Fast queue, visit context, minimal taps, clear disposition | Full support                                         |
+| **Doctors & clinical leads**        | Oversight, holds, review without blocking frontline        | Full support                                         |
+| **Clinic ops / admin**              | Event setup, dashboard, clinic flow                        | Full support                                         |
+| **Racers**                          | Check-in / status; visibility while waiting                | Full support (including self-service where designed) |
+| **Waiting area**                    | Shared display of queue/status                             | **Kiosk** display in v1                              |
 
 ## What success looks like
 

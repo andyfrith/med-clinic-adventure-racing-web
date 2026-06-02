@@ -111,10 +111,10 @@ Numbered task groups. Complete in order where dependencies apply; parallelize wi
 
 ## Suggested PR slicing (optional)
 
-| PR | Contents |
-|----|----------|
-| 1 | Toolchain + Docker + Drizzle + README local |
-| 2 | UI shell + shadcn + placeholder routes |
-| 3 | Vitest + Playwright + GHA + Vercel/Neon preview |
+| PR  | Contents                                        |
+| --- | ----------------------------------------------- |
+| 1   | Toolchain + Docker + Drizzle + README local     |
+| 2   | UI shell + shadcn + placeholder routes          |
+| 3   | Vitest + Playwright + GHA + Vercel/Neon preview |
 
 Single PR acceptable if small team and CI stays green.

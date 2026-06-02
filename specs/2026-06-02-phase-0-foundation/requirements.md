@@ -10,18 +10,18 @@ Deliver a runnable, deployable foundation: Next.js app at repo root, local Postg
 
 ## In scope
 
-| Area | Requirement |
-|------|-------------|
-| **Stack** | Next.js (App Router), TypeScript (strict), ESLint, Prettier |
-| **Data & forms** | **Zod**, **React Hook Form** (`@hookform/resolvers`), **TanStack Query** — installed and wired (providers, conventions); no production forms/queries until later phases |
-| **Database** | Drizzle ORM + PostgreSQL; Docker Compose for local; Neon connection documented for prod/preview |
-| **UI** | Tailwind CSS; shadcn/ui initialized with core primitives and layout-oriented components (sidebar, header, etc.) sized for future staff dashboard and kiosk |
-| **App shell** | Responsive layout stub; **placeholder routes/pages** for clinician, doctor, ops, and racer flows plus a **kiosk-friendly** waiting-area view (static/placeholder content only) |
+| Area                     | Requirement                                                                                                                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Stack**                | Next.js (App Router), TypeScript (strict), ESLint, Prettier                                                                                                                      |
+| **Data & forms**         | **Zod**, **React Hook Form** (`@hookform/resolvers`), **TanStack Query** — installed and wired (providers, conventions); no production forms/queries until later phases          |
+| **Database**             | Drizzle ORM + PostgreSQL; Docker Compose for local; Neon connection documented for prod/preview                                                                                  |
+| **UI**                   | Tailwind CSS; shadcn/ui initialized with core primitives and layout-oriented components (sidebar, header, etc.) sized for future staff dashboard and kiosk                       |
+| **App shell**            | Responsive layout stub; **placeholder routes/pages** for clinician, doctor, ops, and racer flows plus a **kiosk-friendly** waiting-area view (static/placeholder content only)   |
 | **Auth (decision only)** | **Auth.js** (credentials + sessions + Drizzle adapter) chosen and documented in `tech-stack.md`; no full login implementation required in Phase 0 unless needed for layout stubs |
-| **CI/CD** | GitHub Actions: lint, typecheck, Vitest, Playwright → Vercel preview on PR |
-| **Config** | `.env.example` with local and Neon-related variables; README covers `docker compose up`, migrate, dev, deploy |
-| **Testing** | Vitest (unit/smoke); Playwright E2E (minimal smoke, e.g. app loads / health or home) |
-| **Repo layout** | Single Next.js application at **repository root** |
+| **CI/CD**                | GitHub Actions: lint, typecheck, Vitest, Playwright → Vercel preview on PR                                                                                                       |
+| **Config**               | `.env.example` with local and Neon-related variables; README covers `docker compose up`, migrate, dev, deploy                                                                    |
+| **Testing**              | Vitest (unit/smoke); Playwright E2E (minimal smoke, e.g. app loads / health or home)                                                                                             |
+| **Repo layout**          | Single Next.js application at **repository root**                                                                                                                                |
 
 ## Out of scope (deferred)
 
@@ -33,16 +33,16 @@ Deliver a runnable, deployable foundation: Next.js app at repo root, local Postg
 
 ## Decisions (locked for this phase)
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| **Auth (Phase 0)** | **Auth.js** + Drizzle adapter | Aligns with tech-stack candidates; record in `tech-stack.md` before Phase 1 implementation |
-| **Scope depth** | Shell + **placeholder pages for all four roles** + kiosk view | Satisfies roadmap “kiosk-friendly layout stub” and mission “all roles from the start” without building auth |
-| **Compliance note in README** | **Skip in Phase 0** | Add when auth and data access exist (Phase 1) |
-| **CI** | **GitHub Actions → Vercel preview** | Roadmap demo target; preview must be demonstrable |
-| **Preview database** | **Vercel preview connects to Neon** (or documented preview DB with same schema) | Stakeholder bar: preview is not static-only |
-| **Structure** | **Root-level Next.js app** | Simplest path to first race |
-| **shadcn** | **Full init** — primitives + layout components with future dashboard/kiosk in mind | Reduces rework in Phases 3–4 |
-| **Zod / RHF / TanStack Query** | **Phase 0 install + scaffold** | Aligns with `tech-stack.md`; RHF + Zod via shadcn Form; `QueryClientProvider` in root layout |
+| Decision                       | Choice                                                                             | Rationale                                                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **Auth (Phase 0)**             | **Auth.js** + Drizzle adapter                                                      | Aligns with tech-stack candidates; record in `tech-stack.md` before Phase 1 implementation                  |
+| **Scope depth**                | Shell + **placeholder pages for all four roles** + kiosk view                      | Satisfies roadmap “kiosk-friendly layout stub” and mission “all roles from the start” without building auth |
+| **Compliance note in README**  | **Skip in Phase 0**                                                                | Add when auth and data access exist (Phase 1)                                                               |
+| **CI**                         | **GitHub Actions → Vercel preview**                                                | Roadmap demo target; preview must be demonstrable                                                           |
+| **Preview database**           | **Vercel preview connects to Neon** (or documented preview DB with same schema)    | Stakeholder bar: preview is not static-only                                                                 |
+| **Structure**                  | **Root-level Next.js app**                                                         | Simplest path to first race                                                                                 |
+| **shadcn**                     | **Full init** — primitives + layout components with future dashboard/kiosk in mind | Reduces rework in Phases 3–4                                                                                |
+| **Zod / RHF / TanStack Query** | **Phase 0 install + scaffold**                                                     | Aligns with `tech-stack.md`; RHF + Zod via shadcn Form; `QueryClientProvider` in root layout                |
 
 ## Context
 
