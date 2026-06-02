@@ -46,6 +46,7 @@ Adventure Racing Med Clinic is an onsite clinical operations application for adv
 4. **Racer-facing where it helps flow** — Self-service check-in/status plus kiosk; not a consumer medical portal.
 5. **Event-first** — Temporary onsite clinic, not a year-round hospital EMR.
 6. **Professional UX** — Attractive, responsive, modern browsers (per README stakeholders).
+7. **Responsive by default** — Every surface follows `responsive-design.md`: mobile-first layouts, role-appropriate viewports (phone for racers, tablet for clinicians, desktop for ops/doctors, large display for kiosk).
 
 ## Scope (from stakeholders)
 
@@ -63,4 +64,4 @@ Adventure Racing Med Clinic is an onsite clinical operations application for adv
 
 ## Alignment with README
 
-Dashboard on a **reliable, tested** stack (TypeScript, Next.js, React, Postgres) with strong **UX** and **responsive** design. This document guides `tech-stack.md` and `roadmap.md`.
+Dashboard on a **reliable, tested** stack (TypeScript, Next.js, React, Postgres) with strong **UX** and **responsive** design. UI work must meet `specs/responsive-design.md`. This document guides `tech-stack.md`, `responsive-design.md`, and `roadmap.md`.

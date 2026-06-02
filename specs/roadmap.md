@@ -2,7 +2,7 @@
 
 Phased implementation for Adventure Racing Med Clinic. Small phases; each demoable before the next.
 
-Aligned with `mission.md` and `tech-stack.md`.
+Aligned with `mission.md`, `tech-stack.md`, and `responsive-design.md`.
 
 ## Stakeholder decisions
 
@@ -25,7 +25,8 @@ Captured via constitution questionnaire.
 
 - [x] Next.js + TypeScript + ESLint/Prettier
 - [x] Drizzle + Postgres (Docker Compose local; Neon connection for prod)
-- [x] Tailwind + shadcn/ui app shell (responsive + kiosk-friendly layout stub)
+- [x] Tailwind + shadcn/ui app shell (layout stub; responsive standards in `responsive-design.md`)
+- [ ] **Responsive design pass** — app shell, placeholder routes, and kiosk meet `responsive-design.md` (mobile nav, viewport tests)
 - [x] CI: GitHub Actions → Vercel preview
 - [x] `.env.example`; README: `docker compose up`, migrate, dev, deploy
 - [x] **Auth decision** documented in `tech-stack.md`
@@ -37,13 +38,14 @@ Captured via constitution questionnaire.
 
 ## Phase 1 — Event, staff & racer access
 
-**Outcome:** All roles can sign in; data scoped to an event.
+**Outcome:** All roles can sign in; data scoped to an event. UI meets `responsive-design.md` (racer login on phone; ops on desktop).
 
 - [ ] Models: `Event`, `StaffUser`, roles (clinician, doctor, ops), `Racer` account or racer-linked auth as designed in Phase 0
 - [ ] Authentication (per Phase 0 choice)
 - [ ] Route protection (authenticated app; v1 no field-level masking)
 - [ ] Admin/ops: create and select active event
 - [ ] Seed: sample event, users per role, sample racers
+- [ ] Responsive: login and post-auth role hubs at phone, tablet, and desktop widths
 
 **Demo:** Login as clinician, doctor, ops, and racer; active event set.
 
@@ -57,6 +59,7 @@ Captured via constitution questionnaire.
 - [ ] Search / lookup; racer self check-in if in scope for this phase
 - [ ] `Visit` with status: `waiting`, `in_treatment`, `cleared`, `hold`
 - [ ] Audit fields (who, when) — foundation for future compliance
+- [ ] Responsive: check-in and search on phone/tablet; staff lookup on tablet/desktop
 
 **Demo:** Check-in → visit in `waiting`.
 
@@ -70,6 +73,7 @@ Captured via constitution questionnaire.
 - [ ] Queue list; status transitions; assign clinician (minimal if needed)
 - [ ] Polling or SSE for live updates
 - [ ] **Kiosk view** — read-only waiting-area display (subset of queue/status)
+- [ ] Responsive: queue board on desktop/tablet; kiosk at 1920×1080; no horizontal scroll on tablet
 
 **Demo:** Board updates as statuses change; kiosk reflects queue.
 
@@ -84,6 +88,7 @@ Captured via constitution questionnaire.
 - [ ] Disposition: return to race, rest, evac, DNF-medical
 - [ ] Treatment timestamps
 - [ ] Doctor read access to visit summary
+- [ ] Responsive: visit documentation on clinician tablet; doctor summary on desktop/tablet
 
 **Demo:** Check-in → queue → in treatment → notes → **cleared for race** (kiosk updates throughout).
 
@@ -96,6 +101,7 @@ Captured via constitution questionnaire.
 - [ ] Session/slot: resource, window, capacity
 - [ ] Book from visit or check-in; list/calendar view
 - [ ] Reschedule / cancel; prevent double-booking
+- [ ] Responsive: calendar/list adapts to tablet and desktop; racer booking on phone
 
 **Demo:** Book session; visible on dashboard and racer/kiosk where applicable.
 
@@ -108,6 +114,7 @@ Captured via constitution questionnaire.
 - [ ] Doctor dashboard: holds, flagged visits
 - [ ] Comment / approve hold release
 - [ ] Event-day stats; export visit log (CSV/PDF)
+- [ ] Responsive: doctor dashboard on desktop and tablet landscape
 
 **Demo:** Doctor releases hold; racer cleared.
 
@@ -118,6 +125,7 @@ Captured via constitution questionnaire.
 **Outcome:** Ready for **next single race** (aggressive target).
 
 - [ ] E2E: check-in → treat → clear; session path; kiosk path
+- [ ] E2E viewport coverage: mobile racer, tablet clinician, desktop ops, kiosk (per `responsive-design.md`)
 - [ ] Load smoke test on queue + kiosk
 - [ ] Runbook: deploy, rollback, Neon backup
 - [ ] Security pass: auth, session timeout on shared devices, no secrets in client
@@ -144,4 +152,5 @@ Captured via constitution questionnaire.
 2. **All roles by Phase 1** — Plan auth and UX for clinician, doctor, ops, and racer from the start.
 3. **Kiosk in Phase 3** — Do not leave waiting-area display until the end.
 4. **Online-only** — No offline sync scope in v1; document venue network contingency in runbook only.
-5. **One phase theme per PR** when possible; update `tech-stack.md` when auth is chosen.
+5. **Responsive design** — Every UI phase follows `responsive-design.md`; complete the Phase 0 responsive pass before Phase 1 feature work.
+6. **One phase theme per PR** when possible; update `tech-stack.md` when auth is chosen.
