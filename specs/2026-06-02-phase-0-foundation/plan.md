@@ -29,8 +29,9 @@ Numbered task groups. Complete in order where dependencies apply; parallelize wi
 2. Initialize shadcn/ui; add **core primitives** (e.g. Button, Card, Input, Badge, Separator).
 3. Add shadcn **Form** primitive (React Hook Form + Zod resolver pattern per `tech-stack.md`).
 4. Add **layout-oriented** shadcn/custom components: app shell, sidebar, header—structured for future staff ops and read-only kiosk.
-5. Define base typography, spacing, and responsive breakpoints suitable for desktop (ops/doctor), tablet (clinician), and large display (kiosk).
+5. Define base typography, spacing, and responsive breakpoints per [responsive-design.md](../responsive-design.md) (desktop ops/doctor, tablet clinician, phone racer, kiosk display).
 6. Add global styles / CSS variables consistent with shadcn theme.
+7. **Mobile staff nav:** Sheet or drawer for sidebar at `< md`; persistent sidebar at `lg+`.
 
 ---
 
@@ -54,7 +55,8 @@ Numbered task groups. Complete in order where dependencies apply; parallelize wi
    - Racer (self-service stub)
    - Kiosk / waiting-area (read-only layout, large type, minimal chrome)
 3. Link or route structure that mirrors future roadmap areas (no API, no DB reads required for placeholders).
-4. Ensure kiosk route is usable on a landscape display (full-width, high contrast).
+4. Ensure kiosk route meets `responsive-design.md`: landscape-friendly, large type, minimal chrome, readable at 1920×1080.
+5. Verify staff placeholder routes at 375px (racer), 768px (clinician), and 1024px+ (ops/doctor) with no horizontal scroll.
 
 ---
 
@@ -83,7 +85,8 @@ Numbered task groups. Complete in order where dependencies apply; parallelize wi
 
 1. **Vitest:** configure for Next/TS; add at least one smoke test (e.g. utility or route handler health).
 2. **Playwright:** configure for CI; minimal E2E (e.g. home or kiosk page loads, title/heading visible).
-3. Document local commands: `test`, `test:e2e`, `test:e2e:ui` (optional).
+3. **Playwright viewports:** smoke tests at 375×667 (mobile), 768×1024 (tablet), 1024×768 (desktop), and 1920×1080 (kiosk) for staff home and `/kiosk`.
+4. Document local commands: `test`, `test:e2e`, `test:e2e:ui` (optional).
 
 ---
 
@@ -114,7 +117,7 @@ Numbered task groups. Complete in order where dependencies apply; parallelize wi
 | PR  | Contents                                        |
 | --- | ----------------------------------------------- |
 | 1   | Toolchain + Docker + Drizzle + README local     |
-| 2   | UI shell + shadcn + placeholder routes          |
+| 2   | UI shell + shadcn + placeholder routes + responsive pass (`responsive-design.md`) |
 | 3   | Vitest + Playwright + GHA + Vercel/Neon preview |
 
 Single PR acceptable if small team and CI stays green.

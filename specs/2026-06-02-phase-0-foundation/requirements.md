@@ -2,7 +2,7 @@
 
 **Roadmap:** [Phase 0 — Foundation](../roadmap.md#phase-0--foundation)  
 **Status:** Spec approved via stakeholder questionnaire (2026-06-02)  
-**Guides:** [mission.md](../mission.md) · [tech-stack.md](../tech-stack.md)
+**Guides:** [mission.md](../mission.md) · [tech-stack.md](../tech-stack.md) · [responsive-design.md](../responsive-design.md)
 
 ## Goal
 
@@ -15,8 +15,9 @@ Deliver a runnable, deployable foundation: Next.js app at repo root, local Postg
 | **Stack**                | Next.js (App Router), TypeScript (strict), ESLint, Prettier                                                                                                                      |
 | **Data & forms**         | **Zod**, **React Hook Form** (`@hookform/resolvers`), **TanStack Query** — installed and wired (providers, conventions); no production forms/queries until later phases          |
 | **Database**             | Drizzle ORM + PostgreSQL; Docker Compose for local; Neon connection documented for prod/preview                                                                                  |
-| **UI**                   | Tailwind CSS; shadcn/ui initialized with core primitives and layout-oriented components (sidebar, header, etc.) sized for future staff dashboard and kiosk                       |
-| **App shell**            | Responsive layout stub; **placeholder routes/pages** for clinician, doctor, ops, and racer flows plus a **kiosk-friendly** waiting-area view (static/placeholder content only)   |
+| **UI**                   | Tailwind CSS; shadcn/ui initialized with core primitives and layout-oriented components (sidebar, header, etc.) sized for future staff dashboard and kiosk |
+| **Responsive design**    | Layouts follow [responsive-design.md](../responsive-design.md): mobile-first breakpoints, role-appropriate viewports, touch-friendly targets, kiosk typography |
+| **App shell**            | Responsive layout stub; **placeholder routes/pages** for clinician, doctor, ops, and racer flows plus a **kiosk-friendly** waiting-area view (static/placeholder content only) |
 | **Auth (decision only)** | **Auth.js** (credentials + sessions + Drizzle adapter) chosen and documented in `tech-stack.md`; no full login implementation required in Phase 0 unless needed for layout stubs |
 | **CI/CD**                | GitHub Actions: lint, typecheck, Vitest, Playwright → Vercel preview on PR                                                                                                       |
 | **Config**               | `.env.example` with local and Neon-related variables; README covers `docker compose up`, migrate, dev, deploy                                                                    |
@@ -57,6 +58,7 @@ Deliver a runnable, deployable foundation: Next.js app at repo root, local Postg
 2. Vercel preview deployment with DB connectivity per validation.md.
 3. Updated `tech-stack.md` **Phase 0 auth** section: Auth.js selected (replace “TBD”).
 4. Placeholder role/kiosk routes discoverable from app shell (no real data).
+5. App shell and placeholders meet `responsive-design.md` (mobile nav, target viewports, Playwright viewport smoke tests).
 
 ## Dependencies
 

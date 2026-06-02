@@ -25,7 +25,7 @@ Captured via constitution questionnaire.
 ## Goals
 
 - **Reliable & testable** — Strict TypeScript, CI on every change, integration tests for visit flows.
-- **Stakeholder-aligned UX** — Responsive dashboard; shadcn/ui for accessible, consistent components.
+- **Stakeholder-aligned UX** — Responsive dashboard per `responsive-design.md`; shadcn/ui for accessible, consistent components.
 - **Ship for next race** — Simple deploy path (Vercel + Neon); local parity via Docker.
 
 ## Core stack
@@ -85,7 +85,13 @@ Captured via constitution questionnaire.
 ## UX & client requirements
 
 - Evergreen browsers (current + previous major)
-- Responsive: desktop ops/doctors; tablet clinicians; kiosk-friendly waiting-area view
+- **Responsive design (required):** All UI follows [`specs/responsive-design.md`](./responsive-design.md)
+  - Mobile-first Tailwind breakpoints; no horizontal scroll at target viewports
+  - **Desktop (`lg+`):** ops and doctor dashboards with persistent sidebar
+  - **Tablet (`md`–`lg`):** clinician workflows; collapsible nav; touch-friendly controls
+  - **Phone (`< md`):** racer self-service; single-column layouts; 44px min tap targets
+  - **Kiosk (`/kiosk`):** large-type, read-only, landscape-friendly waiting-area display
+  - Playwright viewport tests at 375, 768, 1024, and 1920px for changed routes
 - Target WCAG 2.1 AA over time
 
 ## Compliance (deferred)
@@ -113,4 +119,5 @@ Formal HIPAA/regulatory requirements are **not** implemented in initial phases. 
 
 - README: TypeScript, Next.js, React, Postgres, tested architecture, responsive UX
 - `specs/mission.md`
+- `specs/responsive-design.md`
 - `specs/roadmap.md`
